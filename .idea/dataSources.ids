@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - photohost?useUnicode=true&amp;amp;characterEncoding=UTF-8@localhost" uuid="190f6adc-25f1-40fd-8634-5c9ab08601d1">
+    <database-info product="MySQL" version="5.5.49-0ubuntu0.14.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="photohost"/>
+    <table name="album" schema="" catalog="photohost" type="TABLE">
+      <column name="id_album" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="user_id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_album"/>
+      <foreign-key name="fk_album_user" columns="user_id_user" ref-table="user" ref-schema="" ref-catalog="photohost" ref-columns="id_user" update-rule="3" delete-rule="0" deferrability="2"/>
+      <exported-key name="fk_image_album1" table="image" schema="" catalog="photohost" columns="album_id_album"/>
+      <index name="fk_album_user_idx" unique="false" columns="user_id_user"/>
+    </table>
+    <table name="image" schema="" catalog="photohost" type="TABLE">
+      <column name="id_image" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="source" sqlType="VARCHAR" precision="500" scale="0" nullable="false" jdbcType="12"/>
+      <column name="album_id_album" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id_image"/>
+      <foreign-key name="fk_image_album1" columns="album_id_album" ref-table="album" ref-schema="" ref-catalog="photohost" ref-columns="id_album" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="fk_image_album1_idx" unique="false" columns="album_id_album"/>
+    </table>
+    <table name="user" schema="" catalog="photohost" type="TABLE">
+      <column name="id_user" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="email" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="permissions" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id_user"/>
+      <exported-key name="fk_album_user" table="album" schema="" catalog="photohost" columns="user_id_user"/>
+      <index name="email_UNIQUE" unique="true" columns="email"/>
+      <index name="id_user_UNIQUE" unique="true" columns="id_user"/>
+      <index name="login_UNIQUE" unique="true" columns="login"/>
+    </table>
+  </data-source>
+</component>
